@@ -3,25 +3,25 @@ export const example = [
   {
     privileges: ['ROLE_MASTER_READ', 'ROLE_MASTER_WRITE'],
     id: 1,
-    name: 'Master',
+    name: 'Root',
     parentId: 0,
   },
   {
     privileges: ['ROLE_MASTER_DOMAIN_READ', 'ROLE_MASTER_DOMAIN_WRITE'],
     id: 2,
-    name: 'Domain',
+    name: 'item1',
     parentId: 1,
   },
   {
     privileges: ['ROLE_MASTER_CLUSTER_READ', 'ROLE_MASTER_CLUSTER_WRITE'],
     id: 3,
-    name: 'Cluster',
+    name: 'item2',
     parentId: 1,
   },
   {
     privileges: ['ROLE_MASTER_SERVER_READ', 'ROLE_MASTER_SERVER_WRITE'],
     id: 4,
-    name: 'Server',
+    name: 'item3',
     parentId: 1,
   },
   {
@@ -30,13 +30,13 @@ export const example = [
       'ROLE_MASTER_SERVERTEMPLATE_WRITE',
     ],
     id: 5,
-    name: 'ServerTemplate',
+    name: 'item4',
     parentId: 1,
   },
   {
     privileges: ['ROLE_MASTER_RESOURCE_READ', 'ROLE_MASTER_RESOURCE_WRITE'],
     id: 6,
-    name: 'Resource',
+    name: 'item5',
     parentId: 1,
   },
   {
@@ -45,7 +45,7 @@ export const example = [
       'ROLE_MASTER_RESOURCE_MAIL_WRITE',
     ],
     id: 9,
-    name: 'Mail Resource',
+    name: 'item6',
     parentId: 6,
   },
   {
@@ -54,32 +54,32 @@ export const example = [
       'ROLE_MASTER_APPLICATION_WRITE',
     ],
     id: 7,
-    name: 'Application',
+    name: 'item7',
     parentId: 1,
   },
   {
     privileges: ['ROLE_MASTER_STATUS_READ', 'ROLE_MASTER_STATUS_WRITE'],
     id: 8,
-    name: 'Status',
+    name: 'item8',
     parentId: 1,
   },
   // root
   {
     privileges: ['ROLE_JEUS_READ', 'ROLE_JEUS_WRITE'],
     id: 100,
-    name: 'Jeus',
+    name: 'root2',
     parentId: 0,
   },
   {
     privileges: ['ROLE_JEUS_OVERVIEW_READ', 'ROLE_JEUS_OVERVIEW_WRITE'],
     id: 101,
-    name: 'Overview',
+    name: 'item9',
     parentId: 100,
   },
   {
     privileges: ['ROLE_JEUS_SERVER_READ', 'ROLE_JEUS_SERVER_WRITE'],
     id: 102,
-    name: 'Server',
+    name: 'item10',
     parentId: 100,
   },
 ];

@@ -13,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|tsx|ts)$/,
+        test: /\.(js|jsx|tsx|ts|scss)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -51,7 +51,7 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.tsx', '.ts'],
+    extensions: ['.scss', '.js', '.jsx', '.css', '.tsx', '.ts'],
     alias: {
       ConfigCheckboxTree: path.resolve(__dirname, 'src/ConfigCheckboxTree'),
       data: path.resolve(__dirname, 'src/data'),
