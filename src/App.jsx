@@ -14,13 +14,27 @@ function App() {
     }));
   };
 
+  const initCheckStates = (item) => {
+    return [0, 1];
+  };
+
   return (
-    <MultiTree
-      items={items.treeItem}
-      itemName="treeItems"
-      checkboxCount={2}
-      onSelected={onSelected}
-    />
+    <>
+      <MultiTree
+        disable
+        items={items.treeItem}
+        itemName="treeItems"
+        checkboxCount={2}
+        onSelected={onSelected}
+        initCheckStates={initCheckStates}
+      />
+      <MultiTree
+        items={items.treeItem}
+        itemName="treeItems"
+        checkboxCount={2}
+        onSelected={onSelected}
+      />
+    </>
   );
 }
 

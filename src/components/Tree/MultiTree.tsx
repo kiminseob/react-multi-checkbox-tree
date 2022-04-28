@@ -25,6 +25,7 @@ const MultiTree = ({
   itemName = '',
   checkboxCount = 1,
   onSelected = () => {},
+  initCheckStates,
 }: {
   disable: boolean;
   isChecked: boolean;
@@ -32,16 +33,18 @@ const MultiTree = ({
   itemName: string;
   checkboxCount: number;
   onSelected: (itemName: string, updateStates: ItemState[]) => void;
+  initCheckStates: (item: Item | undefined) => number[];
 }) => {
-  const initStates = () =>
+  const defaultCheckStates = () =>
     [...Array(checkboxCount)].map((v) =>
       isChecked ? CheckboxState.CHECKED : CheckboxState.UNCHECKED
     );
+  if (!initCheckStates) initCheckStates = defaultCheckStates;
 
-  const defaultItemStates: ItemState[] = items.map((i) => ({
-    id: i.id,
-    parentId: i.parentId,
-    checkStates: initStates(),
+  const defaultItemStates: ItemState[] = items.map((item) => ({
+    id: item.id,
+    parentId: item.parentId,
+    checkStates: initCheckStates(item),
     visible: true,
     expaned: true,
   }));
