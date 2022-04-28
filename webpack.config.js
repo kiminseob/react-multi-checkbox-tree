@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3001;
 
 module.exports = {
   // 개발환경
@@ -53,7 +53,7 @@ module.exports = {
   resolve: {
     extensions: ['.scss', '.js', '.jsx', '.css', '.tsx', '.ts'],
     alias: {
-      ConfigCheckboxTree: path.resolve(__dirname, 'src/ConfigCheckboxTree'),
+      components: path.resolve(__dirname, 'src/components'),
       data: path.resolve(__dirname, 'src/data'),
     },
   },

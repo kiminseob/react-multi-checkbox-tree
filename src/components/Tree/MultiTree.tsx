@@ -4,81 +4,61 @@ import { updateItemStates } from './updateItemStates';
 import type { Item } from '../CheckboxList/CheckboxList';
 import styles from '../CheckboxList/checkboxlist.module.scss';
 
-export enum CheckboxState {
-  UNCHECKED,
-  CHECKED,
-  INDETERMINATE,
-}
+export const CheckboxState = {
+  UNCHECKED: 0,
+  CHECKED: 1,
+  INDETERMINATE: 2,
+};
 
 export type ItemState = {
-  privileges: string[];
   id: number;
   parentId: number;
-  state: Array<CheckboxState>;
-  visible: Boolean;
-  expaned: Boolean;
+  checkStates: number[];
+  visible: boolean;
+  expaned: boolean;
 };
 
-type RoleDetailInfo = {
-  privileges: string[];
-};
-
-const Tree = ({
+const MultiTree = ({
   disable = false,
-  items,
-  roleName,
-  privilegeNames = [],
+  isChecked = true,
+  items = [],
+  itemName = '',
+  checkboxCount = 1,
   onSelected = () => {},
-  itemStates = [],
 }: {
   disable: boolean;
+  isChecked: boolean;
   items: Item[];
-  roleName: string;
-  privilegeNames: string[];
-  onSelected: (roleName: string, updateStates: ItemState[]) => void;
-  updatedPrivileges: (roleName: string, privileges?: (string | null)[]) => void;
-  itemStates: ItemState[];
+  itemName: string;
+  checkboxCount: number;
+  onSelected: (itemName: string, updateStates: ItemState[]) => void;
 }) => {
-  const getStateForId = useCallback(
-    (id: number) => itemStates.find((i) => i.id === id)?.state,
+  const initStates = () =>
+    [...Array(checkboxCount)].map((v) =>
+      isChecked ? CheckboxState.CHECKED : CheckboxState.UNCHECKED
+    );
+
+  const itemStates: ItemState[] = items.map((i) => ({
+    id: i.id,
+    parentId: i.parentId,
+    checkStates: initStates(),
+    visible: true,
+    expaned: true,
+  }));
+
+  const getStatesForId = useCallback(
+    (id: number) => itemStates.find((i) => i.id === id)?.checkStates,
     [itemStates]
   );
 
   const clickHandler = useCallback(
-    (id, idx) => {
+    (id: number, idx: number) => {
       if (disable) return;
       const updatedStates = updateItemStates(itemStates, items, id, idx);
-      onSelected(roleName, updatedStates);
+      onSelected(itemName, updatedStates);
     },
     [itemStates]
   );
-
-  const searchTree = (
-    idx: number,
-    states: ItemState,
-    positioned: boolean[]
-  ): string | null => {
-    const { id, parentId, state, privileges } = states;
-
-    switch (state[idx]) {
-      case 1:
-        positioned[id] = true;
-        return positioned[parentId] ? null : privileges[idx];
-      default:
-        return null;
-    }
-  };
-
-  const getPrivileges = (
-    updatedStates: ItemState[],
-    idx: number
-  ): Array<string | null> => {
-    const positioned: boolean[] = [];
-    return updatedStates.map((states) => searchTree(idx, states, positioned));
-  };
-
-  const updatePrivileges = (updatedStates: ItemState[]) =>
-    getPrivileges(updatedStates, 1).filter((privilege) => privilege);
 
   const getChildIds = (parentId: number) =>
     items.filter((i) => i.parentId === parentId).map((i) => i.id);
@@ -92,7 +72,7 @@ const Tree = ({
     });
 
     onSelected(
-      roleName,
+      itemName,
       itemStates.map((i) => {
         i.expaned = i.id === id ? !isExpaned : i.expaned;
         i.visible = childIds.indexOf(i.id) >= 0 ? !isExpaned : i.visible;
@@ -118,9 +98,9 @@ const Tree = ({
     <>
       <CheckboxList
         items={items}
+        checkboxCount={checkboxCount}
         onClick={clickHandler}
-        getStateForId={getStateForId}
-        privilegeNames={privilegeNames}
+        getStatesForId={getStatesForId}
         toggle={toggle}
         itemStates={itemStates}
       />
@@ -128,4 +108,4 @@ const Tree = ({
   );
 };
 
-export default Tree;
+export default MultiTree;

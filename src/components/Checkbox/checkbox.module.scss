@@ -1,11 +1,11 @@
 .checkbox {
-  $color: #0896b4;
+  $color: #000000;
   $size: 16px;
   $fontSize: 14px;
   width: $size;
   height: $size;
   display: inline-block;
-  background-color: lighten($color, 40%);
+  background-color: white;
   color: white;
   text-align: center;
   font-weight: bold;
@@ -28,7 +28,7 @@
   }
 
   &.isIndeterminate {
-    background-color: orange;
+    background-color: $color;
     &::after {
       content: '•';
     }

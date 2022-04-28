@@ -3,12 +3,11 @@
 import React from 'react';
 import { ArrowDropDown, ArrowRight } from '@mui/icons-material';
 import Checkbox from '../Checkbox/Checkbox';
-import { CheckboxState } from '../Tree/Tree';
+import { CheckboxState } from '../Tree/MultiTree';
 import styles from './checkboxlist.module.scss';
-import type { ItemState } from '../Tree/Tree';
+import type { ItemState } from '../Tree/MultiTree';
 
 export type Item = {
-  privileges: string[];
   id: number;
   name: string;
   parentId: number;
@@ -17,22 +16,22 @@ export type Item = {
 type CheckboxListProps = {
   itemStates: ItemState[];
   items: Item[];
+  checkboxCount: number;
   idsToRender?: number[];
   indentLevel?: number;
   onClick?: (id: number, idx: number) => void;
-  getStateForId: (id: number) => CheckboxState[] | undefined;
-  privilegeNames?: string[];
+  getStatesForId: (id: number) => number[] | undefined;
   toggle: (e: React.MouseEvent<HTMLSpanElement>) => void;
 };
 
 const CheckboxList: React.FC<CheckboxListProps> = ({
   itemStates,
   items,
-  getStateForId,
+  checkboxCount,
+  getStatesForId,
   idsToRender = [],
   indentLevel = 1,
   onClick = () => {},
-  privilegeNames,
   toggle,
 }) => {
   if (!idsToRender.length) {
@@ -49,10 +48,11 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
       <CheckboxList
         itemStates={itemStates}
         items={items}
+        checkboxCount={checkboxCount}
         idsToRender={nodeItems.map((i) => i.id)}
         indentLevel={indentLevel + 1}
         onClick={onClick}
-        getStateForId={getStateForId}
+        getStatesForId={getStatesForId}
         toggle={toggle}
       />
     );
@@ -67,19 +67,10 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
 
   return (
     <ul className={styles.list}>
-      {privilegeNames && (
-        <li>
-          <div>
-            {privilegeNames?.map((privilegeName) => (
-              <div className={styles.privilegeName}>{privilegeName}</div>
-            ))}
-          </div>
-        </li>
-      )}
       {idsToRender.map((id) => {
         const item = items.find((i) => i.id === id);
-        const checkboxState = getStateForId(id);
-        const [READ, WRITE] = checkboxState ?? [0, 0];
+        const checkboxStates = getStatesForId(id);
+
         return (
           <React.Fragment key={item?.id}>
             <li data-id={item!.id}>
@@ -90,11 +81,16 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
                     marginRight: indentLevel * 25,
                   }}
                 >
-                  <Checkbox
-                    onClick={() => onClick(item!.id, 1)}
-                    isChecked={WRITE === CheckboxState.CHECKED}
-                    isIndeterminate={WRITE === CheckboxState.INDETERMINATE}
-                  />
+                  {[...Array(checkboxCount)].map((v, i) => (
+                    <Checkbox
+                      key={i}
+                      onClick={() => onClick(item!.id, i)}
+                      isChecked={checkboxStates![i] === CheckboxState.CHECKED}
+                      isIndeterminate={
+                        checkboxStates![i] === CheckboxState.INDETERMINATE
+                      }
+                    />
+                  ))}
                 </div>
                 {getNodeItems(item!.id).length !== 0 && (
                   <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
