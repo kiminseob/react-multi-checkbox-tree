@@ -15,7 +15,12 @@ function App() {
   };
 
   return (
-    <MultiTree checkboxCount={2} items={items.treeItem} itemName="treeItems" />
+    <MultiTree
+      items={items.treeItem}
+      itemName="treeItems"
+      checkboxCount={2}
+      onSelected={onSelected}
+    />
   );
 }
 

@@ -42,7 +42,6 @@ export const updateItemStates = (
   const setUnchecked = (id: number) => {
     const checkedId = newState.find((i) => i.id === id);
     checkedId!.checkStates[idx] = CheckboxState.UNCHECKED;
-    if (idx === 0) checkedId!.checkStates[1] = CheckboxState.UNCHECKED;
 
     items
       .filter((i) => i.parentId === id)
@@ -53,7 +52,6 @@ export const updateItemStates = (
   const setChecked = (id: number) => {
     const checkedId = newState.find((i) => i.id === id);
     checkedId!.checkStates[idx] = CheckboxState.CHECKED;
-    if (idx === 1) checkedId!.checkStates[0] = CheckboxState.CHECKED;
 
     items
       .filter((i) => i.parentId === id)
@@ -63,7 +61,7 @@ export const updateItemStates = (
   };
   // actual logic
   const itemState = getItemState(clickedId, idx);
-  console.log(itemState);
+
   if (itemState === CheckboxState.CHECKED) {
     setUnchecked(clickedId);
   } else {

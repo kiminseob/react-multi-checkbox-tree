@@ -38,13 +38,15 @@ const MultiTree = ({
       isChecked ? CheckboxState.CHECKED : CheckboxState.UNCHECKED
     );
 
-  const itemStates: ItemState[] = items.map((i) => ({
+  const defaultItemStates: ItemState[] = items.map((i) => ({
     id: i.id,
     parentId: i.parentId,
     checkStates: initStates(),
     visible: true,
     expaned: true,
   }));
+
+  const [itemStates, setItemStates] = useState<ItemState[]>(defaultItemStates);
 
   const getStatesForId = useCallback(
     (id: number) => itemStates.find((i) => i.id === id)?.checkStates,
@@ -55,6 +57,7 @@ const MultiTree = ({
     (id: number, idx: number) => {
       if (disable) return;
       const updatedStates = updateItemStates(itemStates, items, id, idx);
+      setItemStates(updatedStates);
       onSelected(itemName, updatedStates);
     },
     [itemStates]
