@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { ArrowDropDown, ArrowRight } from '@mui/icons-material';
-import Checkbox from '../Checkbox/Checkbox';
-import { CheckboxState } from '../Tree/MultiTree';
+import CheckboxItems from '../CheckboxItems/CheckboxItems';
 import styles from './checkboxlist.module.scss';
 import type { ItemState } from '../Tree/MultiTree';
+import type { Icons } from '../Checkbox/Checkbox';
 
 export type Item = {
   id: number;
@@ -16,10 +16,14 @@ export type Item = {
 type CheckboxListProps = {
   itemStates: ItemState[];
   items: Item[];
+  itemName: string;
   checkboxCount: number;
+  checkboxPosition: string;
+  checkboxDistance: number;
   idsToRender?: number[];
   indentLevel?: number;
-  onClick?: (id: number, idx: number) => void;
+  icons: Icons;
+  onClick: (id: number, idx: number) => void;
   getStatesForId: (id: number) => number[] | undefined;
   toggle: (e: React.MouseEvent<HTMLSpanElement>) => void;
 };
@@ -27,11 +31,15 @@ type CheckboxListProps = {
 const CheckboxList: React.FC<CheckboxListProps> = ({
   itemStates,
   items,
+  itemName,
   checkboxCount,
-  getStatesForId,
+  checkboxPosition,
+  checkboxDistance,
   idsToRender = [],
-  indentLevel = 1,
+  indentLevel = 0,
+  icons,
   onClick = () => {},
+  getStatesForId,
   toggle,
 }) => {
   if (!idsToRender.length) {
@@ -48,9 +56,13 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
       <CheckboxList
         itemStates={itemStates}
         items={items}
+        itemName={itemName}
         checkboxCount={checkboxCount}
+        checkboxPosition={checkboxPosition}
+        checkboxDistance={checkboxDistance}
         idsToRender={nodeItems.map((i) => i.id)}
         indentLevel={indentLevel + 1}
+        icons={icons}
         onClick={onClick}
         getStatesForId={getStatesForId}
         toggle={toggle}
@@ -73,29 +85,78 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
 
         return (
           <React.Fragment key={item?.id}>
-            <li data-id={item!.id}>
+            <li data-id={`${itemName}-${item!.id}`}>
               <div>
-                <div
-                  className={styles.checkbox}
-                  style={{
-                    marginRight: indentLevel * 25,
-                  }}
-                >
-                  {[...Array(checkboxCount)].map((v, i) => (
-                    <Checkbox
-                      key={i}
-                      onClick={() => onClick(item!.id, i)}
-                      isChecked={checkboxStates![i] === CheckboxState.CHECKED}
-                      isIndeterminate={
-                        checkboxStates![i] === CheckboxState.INDETERMINATE
-                      }
+                {checkboxPosition === 'detachLeft' && (
+                  <>
+                    <CheckboxItems
+                      item={item!}
+                      icons={icons}
+                      checkboxCount={checkboxCount}
+                      checkboxStates={checkboxStates!}
+                      onClick={onClick}
+                      style={{
+                        marginRight:
+                          indentLevel === 0
+                            ? checkboxDistance
+                            : checkboxDistance + indentLevel * 20,
+                      }}
                     />
-                  ))}
-                </div>
-                {getNodeItems(item!.id).length !== 0 && (
-                  <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
+                    {getNodeItems(item!.id).length !== 0 && (
+                      <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
+                    )}
+                    <div>{item?.name}</div>
+                  </>
                 )}
-                {item?.name}
+                {checkboxPosition === 'attachLeft' && (
+                  <>
+                    <div
+                      style={{
+                        marginRight: indentLevel * 20,
+                      }}
+                    />
+                    {getNodeItems(item!.id).length !== 0 && (
+                      <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
+                    )}
+                    <CheckboxItems
+                      item={item!}
+                      icons={icons}
+                      checkboxCount={checkboxCount}
+                      checkboxStates={checkboxStates!}
+                      onClick={onClick}
+                      style={{
+                        marginRight: 5,
+                      }}
+                    />
+                    <div>{item?.name}</div>
+                  </>
+                )}
+                {checkboxPosition === 'attachRight' && (
+                  <>
+                    <div
+                      style={{
+                        marginRight: indentLevel * 20,
+                      }}
+                    />
+                    {getNodeItems(item!.id).length !== 0 && (
+                      <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
+                    )}
+                    <div
+                      style={{
+                        marginRight: 5,
+                      }}
+                    >
+                      {item?.name}
+                    </div>
+                    <CheckboxItems
+                      item={item!}
+                      icons={icons}
+                      checkboxCount={checkboxCount}
+                      checkboxStates={checkboxStates!}
+                      onClick={onClick}
+                    />
+                  </>
+                )}
               </div>
             </li>
             {getChildNodes(item!.id)}

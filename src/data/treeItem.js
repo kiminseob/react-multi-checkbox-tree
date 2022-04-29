@@ -36,6 +36,21 @@ export const treeItem = [
     parentId: 6,
   },
   {
+    id: 10,
+    name: 'item6',
+    parentId: 9,
+  },
+  {
+    id: 11,
+    name: 'item6',
+    parentId: 10,
+  },
+  {
+    id: 12,
+    name: 'item6',
+    parentId: 10,
+  },
+  {
     id: 7,
     name: 'item7',
     parentId: 1,

@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import CheckboxList from '../CheckboxList/CheckboxList';
 import { updateItemStates } from './updateItemStates';
 import type { Item } from '../CheckboxList/CheckboxList';
+import type { Icons } from '../Checkbox/Checkbox';
 import styles from '../CheckboxList/checkboxlist.module.scss';
 
 export const CheckboxState = {
@@ -18,22 +19,30 @@ export type ItemState = {
   expaned: boolean;
 };
 
-const MultiTree = ({
-  disable = false,
-  isChecked = true,
-  items = [],
-  itemName = '',
-  checkboxCount = 1,
-  onSelected = () => {},
-  initCheckStates,
-}: {
+type MultiTreeProps = {
   disable: boolean;
   isChecked: boolean;
   items: Item[];
   itemName: string;
   checkboxCount: number;
+  checkboxPosition: string;
+  checkboxDistance: number;
+  icons: Icons;
   onSelected: (itemName: string, updateStates: ItemState[]) => void;
   initCheckStates: (item: Item | undefined) => number[];
+};
+
+const MultiTree: React.FC<MultiTreeProps> = ({
+  disable = false,
+  isChecked = true,
+  items = [],
+  itemName = '',
+  checkboxCount = 1,
+  checkboxPosition = 'detachLeft',
+  checkboxDistance = 5,
+  icons = {},
+  onSelected = () => {},
+  initCheckStates,
 }) => {
   const defaultCheckStates = () =>
     [...Array(checkboxCount)].map((v) =>
@@ -73,7 +82,7 @@ const MultiTree = ({
     const childIds = getChildIds(id);
 
     childIds.map((childId) => {
-      const ele = document.querySelector(`[data-id='${childId}']`);
+      const ele = document.querySelector(`[data-id='${itemName}-${childId}']`);
       ele!.className = isExpaned ? styles.invisible : styles.visible;
     });
 
@@ -92,7 +101,8 @@ const MultiTree = ({
   };
 
   const toggle = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const { id } = e.currentTarget.closest('li')!.dataset;
+    const id = e.currentTarget.closest('li')!.dataset.id?.split('-')[1];
+    console.log(id);
     const isExpaned = itemStates.find(
       (i) => i.id === parseInt(id!, 10)
     )!.expaned;
@@ -104,11 +114,15 @@ const MultiTree = ({
     <>
       <CheckboxList
         items={items}
+        itemName={itemName}
         checkboxCount={checkboxCount}
         onClick={clickHandler}
         getStatesForId={getStatesForId}
         toggle={toggle}
         itemStates={itemStates}
+        checkboxPosition={checkboxPosition}
+        checkboxDistance={checkboxDistance}
+        icons={icons}
       />
     </>
   );
