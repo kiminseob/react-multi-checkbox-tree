@@ -80,7 +80,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
   return (
     <ul className={styles.list}>
       {idsToRender.map((id) => {
-        const item = items.find((i) => i.id === id);
+        const item = items.find((i) => i.id === id)!;
         const checkboxStates = getStatesForId(id);
 
         return (
@@ -102,9 +102,13 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
                             : checkboxDistance + indentLevel * 20,
                       }}
                     />
-                    {getNodeItems(item!.id).length !== 0 && (
-                      <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
-                    )}
+                    <CheckboxListControl
+                      item={item}
+                      itemStates={itemStates}
+                      icons={icons}
+                      getNodeItems={getNodeItems}
+                      toggle={toggle}
+                    />
                     <div>{item?.name}</div>
                   </>
                 )}
@@ -115,9 +119,13 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
                         marginRight: indentLevel * 20,
                       }}
                     />
-                    {getNodeItems(item!.id).length !== 0 && (
-                      <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
-                    )}
+                    <CheckboxListControl
+                      item={item}
+                      itemStates={itemStates}
+                      icons={icons}
+                      getNodeItems={getNodeItems}
+                      toggle={toggle}
+                    />
                     <CheckboxItems
                       item={item!}
                       icons={icons}
@@ -138,9 +146,13 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
                         marginRight: indentLevel * 20,
                       }}
                     />
-                    {getNodeItems(item!.id).length !== 0 && (
-                      <span onClick={toggle}>{setArrowIcon(item!.id)}</span>
-                    )}
+                    <CheckboxListControl
+                      item={item}
+                      itemStates={itemStates}
+                      icons={icons}
+                      getNodeItems={getNodeItems}
+                      toggle={toggle}
+                    />
                     <div
                       style={{
                         marginRight: 5,
@@ -164,6 +176,35 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
         );
       })}
     </ul>
+  );
+};
+
+type CheckboxListControl = {
+  item: Item;
+  itemStates: ItemState[];
+  icons: Icons;
+  getNodeItems: (parentId: number) => Item[];
+  toggle: (e: React.MouseEvent<HTMLSpanElement>) => void;
+};
+
+const CheckboxListControl: React.FC<CheckboxListControl> = ({
+  item,
+  itemStates,
+  icons,
+  getNodeItems,
+  toggle,
+}) => {
+  const setIcon = (id: number) =>
+    itemStates.find((i) => i.id === id)?.expaned ? (
+      <ArrowDropDown sx={innerStyle.arrow} />
+    ) : (
+      <ArrowRight sx={innerStyle.arrow} />
+    );
+
+  return getNodeItems(item!.id).length !== 0 ? (
+    <span onClick={toggle}>{setIcon(item!.id)}</span>
+  ) : (
+    <></>
   );
 };
 

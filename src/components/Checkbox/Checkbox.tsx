@@ -6,8 +6,10 @@ import styles from './checkbox.module.scss';
 
 export type Icons = {
   indeterminate?: ReactElement;
-  checked?: ReactElement;
-  unChecked?: ReactElement;
+  check?: ReactElement;
+  unCheck?: ReactElement;
+  expand?: ReactElement;
+  collapse?: ReactElement;
 };
 
 type checkboxProps = {
@@ -30,10 +32,10 @@ const Checkbox: React.FC<checkboxProps> = ({
   const render = () => {
     if (isIndeterminate && icons.indeterminate) {
       return React.cloneElement(icons.indeterminate, { onClick });
-    } else if (isChecked && icons.checked) {
-      return React.cloneElement(icons.checked, { onClick });
-    } else if (icons.unChecked) {
-      return React.cloneElement(icons.unChecked, { onClick });
+    } else if (isChecked && icons.check) {
+      return React.cloneElement(icons.check, { onClick });
+    } else if (icons.unCheck) {
+      return React.cloneElement(icons.unCheck, { onClick });
     }
     return <div className={className} onClick={onClick} />;
   };

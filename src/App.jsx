@@ -6,10 +6,13 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckIcon from '@mui/icons-material/Check';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import CheckBoxTwoToneIcon from '@mui/icons-material/CheckBoxTwoTone';
 
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxOutlineBlankTwoToneIcon from '@mui/icons-material/CheckBoxOutlineBlankTwoTone';
 
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
+import IndeterminateCheckBoxTwoToneIcon from '@mui/icons-material/IndeterminateCheckBoxTwoTone';
 
 function App() {
   const [items, setItems] = useState({
@@ -47,8 +50,8 @@ function App() {
         // checkboxDistance={40}
         icons={{
           indeterminate: <IndeterminateCheckBoxIcon />,
-          checked: <CheckBoxIcon />,
-          unChecked: <CheckBoxOutlineBlankIcon />,
+          check: <CheckBoxIcon />,
+          unCheck: <CheckBoxOutlineBlankIcon />,
         }}
       />
       <MultiTree
@@ -57,6 +60,13 @@ function App() {
         checkboxCount={3}
         checkboxPosition="attachLeft"
         onSelected={onSelected}
+        icons={{
+          indeterminate: <IndeterminateCheckBoxTwoToneIcon />,
+          check: <CheckBoxTwoToneIcon />,
+          unCheck: <CheckBoxOutlineBlankTwoToneIcon />,
+          // expand: '',
+          // collapse: '',
+        }}
       />
     </>
   );
