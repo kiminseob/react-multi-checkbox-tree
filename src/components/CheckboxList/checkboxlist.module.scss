@@ -22,3 +22,26 @@ ul.list {
     }
   }
 }
+
+.arrowWrapper {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  width: 4px;
+  height: 4px;
+  border: solid black;
+  border-width: 0 1px 1px 0;
+}
+
+.right {
+  transform: rotate(-45deg);
+}
+
+.down {
+  transform: rotate(45deg);
+}
