@@ -14,6 +14,11 @@ import CheckBoxOutlineBlankTwoToneIcon from '@mui/icons-material/CheckBoxOutline
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import IndeterminateCheckBoxTwoToneIcon from '@mui/icons-material/IndeterminateCheckBoxTwoTone';
 
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// defulat icon size : 24 * 24;
+
 function App() {
   const [items, setItems] = useState({
     treeItem,
@@ -27,13 +32,12 @@ function App() {
   };
 
   const initCheckStates = (item) => {
-    return [0, 1];
+    return [1, 1];
   };
 
   return (
     <>
       <MultiTree
-        disable
         items={items.treeItem}
         itemName="treeItems"
         checkboxCount={2}
@@ -47,7 +51,7 @@ function App() {
         checkboxCount={4}
         onSelected={onSelected}
         checkboxPosition="detachLeft"
-        // checkboxDistance={40}
+        checkboxDistance={10}
         icons={{
           indeterminate: <IndeterminateCheckBoxIcon />,
           check: <CheckBoxIcon />,
@@ -64,8 +68,8 @@ function App() {
           indeterminate: <IndeterminateCheckBoxTwoToneIcon />,
           check: <CheckBoxTwoToneIcon />,
           unCheck: <CheckBoxOutlineBlankTwoToneIcon />,
-          // expand: '',
-          // collapse: '',
+          expand: <ExpandMoreIcon />,
+          collapse: <ChevronRightIcon />,
         }}
       />
     </>
