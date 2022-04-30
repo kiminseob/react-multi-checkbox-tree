@@ -1,9 +1,8 @@
 import React from 'react';
 import Checkbox from '../Checkbox/Checkbox';
 import { CheckboxState } from '../Tree/MultiTree';
+import { Item, Icons } from 'types';
 import styles from './checkboxItems.module.scss';
-import type { Item } from '../CheckboxList/CheckboxList';
-import type { Icons } from '../Checkbox/Checkbox';
 
 type CheckboxItemsProps = {
   style?: object;
@@ -27,9 +26,9 @@ const CheckboxItems: React.FC<CheckboxItemsProps> = ({
       {[...Array(checkboxCount)].map((v, i) => (
         <Checkbox
           key={i}
-          onClick={() => onClick(item!.id, i)}
-          isChecked={checkboxStates![i] === CheckboxState.CHECKED}
-          isIndeterminate={checkboxStates![i] === CheckboxState.INDETERMINATE}
+          onClick={() => onClick(item.id, i)}
+          isChecked={checkboxStates[i] === CheckboxState.CHECKED}
+          isIndeterminate={checkboxStates[i] === CheckboxState.INDETERMINATE}
           icons={icons}
         />
       ))}
