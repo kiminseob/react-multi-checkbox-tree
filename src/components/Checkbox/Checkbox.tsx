@@ -24,7 +24,9 @@ const Checkbox: React.FC<checkboxProps> = ({
 }) => {
   const className = `${styles.checkbox} ${
     isIndeterminate ? styles.isIndeterminate : ''
-  } ${isChecked ? styles.isChecked : ''} `;
+  } ${isChecked ? styles.isChecked : ''} ${
+    !isChecked && !isIndeterminate ? styles.isUnChecked : ''
+  }`;
 
   const render = () => {
     if (isIndeterminate && icons.indeterminate) {

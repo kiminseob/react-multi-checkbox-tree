@@ -1,9 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import CheckboxItems from '../CheckboxItems/CheckboxItems';
 import CheckboxPositionAssemble from '../CheckboxItems/CheckboxPositionAssemble';
-import CheckboxListControl from './CheckboxListControl';
 import styles from './checkboxlist.module.scss';
 import { ItemState, Icons, Item } from 'types';
 
@@ -82,6 +78,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
                   {
                     item,
                     icons,
+                    indent,
                     checkboxCount,
                     checkboxStates,
                     onClick,

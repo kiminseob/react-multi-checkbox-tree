@@ -1,7 +1,7 @@
 .checkbox {
-  $color: #000000;
-  $size: 16px;
-  $fontSize: 14px;
+  $color: black;
+  $size: 1em;
+  $fontSize: 1em;
   width: $size;
   height: $size;
   display: inline-block;
@@ -11,9 +11,9 @@
   font-weight: bold;
   font-size: $fontSize;
   position: relative;
-  border: 1px solid white;
   outline: 1px solid #ddd;
   line-height: $fontSize;
+  box-sizing: border-box;
   cursor: pointer;
 
   &::after {
@@ -25,6 +25,10 @@
     &::after {
       content: '✓';
     }
+  }
+
+  &.isUnChecked {
+    border: 1px solid black;
   }
 
   &.isIndeterminate {

@@ -7,6 +7,7 @@ import styles from './checkboxItems.module.scss';
 type CheckboxItemsProps = {
   style?: object;
   item: Item;
+  indent: number;
   checkboxCount: number;
   checkboxStates: number[];
   icons: Icons;
@@ -15,14 +16,21 @@ type CheckboxItemsProps = {
 
 const CheckboxItems: React.FC<CheckboxItemsProps> = ({
   item,
+  indent,
   checkboxCount,
   checkboxStates,
   onClick,
-  style = {},
   icons,
 }) => {
   return (
-    <div className={styles.checkbox} style={style}>
+    <div
+      className={styles.checkbox}
+      style={{
+        fontSize: indent * (5 / 6),
+        width: checkboxCount * indent,
+        height: indent,
+      }}
+    >
       {[...Array(checkboxCount)].map((v, i) => (
         <Checkbox
           key={i}

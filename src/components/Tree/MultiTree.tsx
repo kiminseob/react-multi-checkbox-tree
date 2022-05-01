@@ -20,7 +20,8 @@ type MultiTreeProps = {
   checkboxDistance: number;
   indent: number;
   icons: Icons;
-  onSelected: (itemName: string, updateStates: ItemState[]) => void;
+  onCheck: (itemName: string, updateStates: ItemState[]) => void;
+  onExpand: (itemName: string, checkStates: number[] | undefined) => void;
   initCheckStates: (item: Item | undefined) => number[];
 };
 
@@ -34,7 +35,8 @@ const MultiTree: React.FC<MultiTreeProps> = ({
   checkboxDistance = 5,
   indent = 24,
   icons = {},
-  onSelected = () => {},
+  onCheck = () => {},
+  onExpand = () => {},
   initCheckStates,
 }) => {
   const defaultCheckStates = () =>
@@ -63,7 +65,7 @@ const MultiTree: React.FC<MultiTreeProps> = ({
       if (disable) return;
       const updatedStates = updateItemStates(itemStates, items, id, idx);
       setItemStates(updatedStates);
-      onSelected(itemName, updatedStates);
+      onCheck(itemName, updatedStates);
     },
     [itemStates]
   );
@@ -79,8 +81,7 @@ const MultiTree: React.FC<MultiTreeProps> = ({
       ele!.className = isExpand ? styles.invisible : styles.visible;
     });
 
-    onSelected(
-      itemName,
+    setItemStates(
       itemStates.map((i) => {
         i.expand = i.id === id ? !isExpand : i.expand;
         i.visible = childIds.indexOf(i.id) >= 0 ? !isExpand : i.visible;
@@ -94,10 +95,10 @@ const MultiTree: React.FC<MultiTreeProps> = ({
   };
 
   const toggle = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const id = e.currentTarget.closest('li')!.dataset.id?.split('-')[1];
-    console.log(id);
-    const isExpand = itemStates.find((i) => i.id === parseInt(id!, 10))!.expand;
+    const id = e.currentTarget.closest('li')!.dataset.id!.split('-')[1];
+    const isExpand = itemStates.find((i) => i.id === parseInt(id, 10))!.expand;
 
+    onExpand(itemName, getStatesForId(parseInt(id, 10)));
     toggleChild(parseInt(id!, 10), isExpand);
   };
 

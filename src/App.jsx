@@ -17,39 +17,46 @@ import IndeterminateCheckBoxTwoToneIcon from '@mui/icons-material/IndeterminateC
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-// defulat icon size : 24 * 24;
 
 function App() {
   const [items, setItems] = useState({
     treeItem,
   });
 
-  const onSelected = (itemName, updatedItems) => {
-    setItems((preState) => ({
-      ...preState,
-      [itemName]: updatedItems,
-    }));
+  const onCheck = (itemName, updatedItems) => {
+    console.log(itemName, updatedItems);
+    // setItems((preState) => ({
+    //   ...preState,
+    //   [itemName]: updatedItems,
+    // }));
+  };
+
+  const onExpand = (itemName, target) => {
+    console.log('onExpand', itemName, target);
   };
 
   const initCheckStates = (item) => {
     return [1, 1];
   };
 
+  /** TODO
+    checkbox size props , indent props 따로 나눠야 할듯
+  */
   return (
     <>
       <MultiTree
         items={items.treeItem}
         itemName="treeItems"
-        checkboxCount={2}
-        onSelected={onSelected}
-        initCheckStates={initCheckStates}
-        checkboxPosition="attachRight"
+        checkboxCount={12}
+        onCheck={onCheck}
+        onExpand={onExpand}
+        // initCheckStates={initCheckStates}
+        // checkboxPosition=""
       />
       <MultiTree
         items={items.treeItem}
         itemName="treeItems2"
         checkboxCount={4}
-        onSelected={onSelected}
         checkboxPosition="detachLeft"
         checkboxDistance={10}
         icons={{
@@ -63,7 +70,6 @@ function App() {
         itemName="treeItems3"
         checkboxCount={3}
         checkboxPosition="attachLeft"
-        onSelected={onSelected}
         icons={{
           indeterminate: <IndeterminateCheckBoxTwoToneIcon />,
           check: <CheckBoxTwoToneIcon />,

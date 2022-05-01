@@ -1,5 +1,5 @@
-import { Item } from '../CheckboxList/CheckboxList';
-import { CheckboxState, ItemState } from './MultiTree';
+import { CheckboxState } from './MultiTree';
+import { Item, ItemState } from 'types';
 
 export const updateItemStates = (
   oldState: ItemState[],
@@ -25,20 +25,30 @@ export const updateItemStates = (
       childStates.length ===
       childStates.filter((s) => s === CheckboxState.CHECKED).length
     ) {
+      console.log('check', parent.id);
       newState.find((i) => i.id === parent.id)!.checkStates[idx] =
         CheckboxState.CHECKED;
     } else if (
       childStates.length ===
       childStates.filter((s) => s === CheckboxState.UNCHECKED).length
     ) {
+      console.log('uncheck', parent.id);
       newState.find((i) => i.id === parent.id)!.checkStates[idx] =
         CheckboxState.UNCHECKED;
     } else {
+      console.log(
+        'INDETERMINATE',
+        childStates,
+        childStates.length,
+        childStates.filter((s) => s === CheckboxState.UNCHECKED).length,
+        parent.id
+      );
       newState.find((i) => i.id === parent.id)!.checkStates[idx] =
         CheckboxState.INDETERMINATE;
     }
     updateParent(parent.id, idx);
   };
+
   const setUnchecked = (id: number) => {
     const checkedId = newState.find((i) => i.id === id);
     checkedId!.checkStates[idx] = CheckboxState.UNCHECKED;
@@ -49,6 +59,7 @@ export const updateItemStates = (
       .forEach((childId) => setUnchecked(childId));
     updateParent(id, idx);
   };
+
   const setChecked = (id: number) => {
     const checkedId = newState.find((i) => i.id === id);
     checkedId!.checkStates[idx] = CheckboxState.CHECKED;
@@ -59,6 +70,7 @@ export const updateItemStates = (
       .forEach((childId) => setChecked(childId));
     updateParent(id, idx);
   };
+
   // actual logic
   const itemState = getItemState(clickedId, idx);
 
