@@ -14,6 +14,7 @@ type CheckboxListProps = {
   indentLevel?: number;
   icons: Icons;
   indent: number;
+  isExpand: boolean;
   onClick: (id: number, idx: number) => void;
   getStatesForId: (id: number) => number[] | undefined;
   toggle: (e: React.MouseEvent<HTMLSpanElement>) => void;
@@ -30,6 +31,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
   indentLevel = 0,
   icons,
   indent,
+  isExpand,
   onClick = () => {},
   getStatesForId,
   toggle,
@@ -56,6 +58,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
         indentLevel={indentLevel + 1}
         icons={icons}
         indent={indent}
+        isExpand={isExpand}
         onClick={onClick}
         getStatesForId={getStatesForId}
         toggle={toggle}
@@ -68,10 +71,19 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
       {idsToRender.map((id) => {
         const item = items.find((i) => i.id === id)!;
         const checkboxStates = getStatesForId(id);
-
+        console.log(item, isExpand);
         return (
           <React.Fragment key={item.id}>
-            <li data-id={`${itemName}-${item.id}`}>
+            <li
+              className={
+                isExpand
+                  ? styles.visible
+                  : item.parentId === 0
+                  ? styles.visible
+                  : styles.invisible
+              }
+              data-id={`${itemName}-${item.id}`}
+            >
               <div>
                 {CheckboxPositionAssemble(
                   checkboxPosition,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MultiTree from 'components/Tree/MultiTree';
-import { treeItem } from 'data/treeItem';
+import { treeItem, jeusRole } from 'data/treeItem';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -21,6 +21,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 function App() {
   const [items, setItems] = useState({
     treeItem,
+    jeusRole,
   });
 
   const onCheck = (itemName, updatedItems) => {
@@ -76,6 +77,19 @@ function App() {
           unCheck: <CheckBoxOutlineBlankTwoToneIcon />,
           expand: <ExpandMoreIcon />,
           collapse: <ChevronRightIcon />,
+        }}
+      />
+      <MultiTree
+        items={items.jeusRole}
+        itemName="jeusRole"
+        checkboxCount={2}
+        isExpand={false}
+        icons={{
+          indeterminate: <IndeterminateCheckBoxTwoToneIcon />,
+          check: <CheckBoxTwoToneIcon />,
+          unCheck: <CheckBoxOutlineBlankTwoToneIcon />,
+          // expand: '',
+          // collapse: '',
         }}
       />
     </>

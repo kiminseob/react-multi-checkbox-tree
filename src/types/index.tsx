@@ -10,7 +10,6 @@ export type ItemState = {
   id: number;
   parentId: number;
   checkStates: number[];
-  visible: boolean;
   expand: boolean;
 };
 

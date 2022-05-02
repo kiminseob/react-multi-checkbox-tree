@@ -24,6 +24,7 @@
     background-color: $color;
     &::after {
       content: '✓';
+      font-size: 0.7em;
     }
   }
 

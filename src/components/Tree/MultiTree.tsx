@@ -13,6 +13,7 @@ export const CheckboxState = {
 type MultiTreeProps = {
   disable: boolean;
   isChecked: boolean;
+  isExpand: boolean;
   items: Item[];
   itemName: string;
   checkboxCount: number;
@@ -28,6 +29,7 @@ type MultiTreeProps = {
 const MultiTree: React.FC<MultiTreeProps> = ({
   disable = false,
   isChecked = true,
+  isExpand = true,
   items = [],
   itemName = '',
   checkboxCount = 1,
@@ -46,11 +48,9 @@ const MultiTree: React.FC<MultiTreeProps> = ({
   if (!initCheckStates) initCheckStates = defaultCheckStates;
 
   const defaultItemStates: ItemState[] = items.map((item) => ({
-    id: item.id,
-    parentId: item.parentId,
+    ...item,
     checkStates: initCheckStates(item),
-    visible: true,
-    expand: true,
+    expand: isExpand,
   }));
 
   const [itemStates, setItemStates] = useState<ItemState[]>(defaultItemStates);
@@ -84,7 +84,6 @@ const MultiTree: React.FC<MultiTreeProps> = ({
     setItemStates(
       itemStates.map((i) => {
         i.expand = i.id === id ? !isExpand : i.expand;
-        i.visible = childIds.indexOf(i.id) >= 0 ? !isExpand : i.visible;
         return i;
       })
     );
@@ -116,6 +115,7 @@ const MultiTree: React.FC<MultiTreeProps> = ({
         checkboxDistance={checkboxDistance}
         indent={indent}
         icons={icons}
+        isExpand={isExpand}
       />
     </>
   );
