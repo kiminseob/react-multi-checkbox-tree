@@ -81,31 +81,31 @@ export const treeItem = [
 export const jeusRole = [
   // root
   {
-    privileges: ['ROLE_MASTER_READ', 'ROLE_MASTER_WRITE'],
+    checkboxName: ['ROLE_MASTER_READ', 'ROLE_MASTER_WRITE'],
     id: 1,
     name: 'Master',
     parentId: 0,
   },
   {
-    privileges: ['ROLE_MASTER_DOMAIN_READ', 'ROLE_MASTER_DOMAIN_WRITE'],
+    checkboxName: ['ROLE_MASTER_DOMAIN_READ', 'ROLE_MASTER_DOMAIN_WRITE'],
     id: 2,
     name: 'Domain',
     parentId: 1,
   },
   {
-    privileges: ['ROLE_MASTER_CLUSTER_READ', 'ROLE_MASTER_CLUSTER_WRITE'],
+    checkboxName: ['ROLE_MASTER_CLUSTER_READ', 'ROLE_MASTER_CLUSTER_WRITE'],
     id: 3,
     name: 'Cluster',
     parentId: 1,
   },
   {
-    privileges: ['ROLE_MASTER_SERVER_READ', 'ROLE_MASTER_SERVER_WRITE'],
+    checkboxName: ['ROLE_MASTER_SERVER_READ', 'ROLE_MASTER_SERVER_WRITE'],
     id: 4,
     name: 'Server',
     parentId: 1,
   },
   {
-    privileges: [
+    checkboxName: [
       'ROLE_MASTER_SERVERTEMPLATE_READ',
       'ROLE_MASTER_SERVERTEMPLATE_WRITE',
     ],
@@ -114,13 +114,13 @@ export const jeusRole = [
     parentId: 1,
   },
   {
-    privileges: ['ROLE_MASTER_RESOURCE_READ', 'ROLE_MASTER_RESOURCE_WRITE'],
+    checkboxName: ['ROLE_MASTER_RESOURCE_READ', 'ROLE_MASTER_RESOURCE_WRITE'],
     id: 6,
     name: 'Resource',
     parentId: 1,
   },
   {
-    privileges: [
+    checkboxName: [
       'ROLE_MASTER_RESOURCE_MAIL_READ',
       'ROLE_MASTER_RESOURCE_MAIL_WRITE',
     ],
@@ -129,7 +129,7 @@ export const jeusRole = [
     parentId: 6,
   },
   {
-    privileges: [
+    checkboxName: [
       'ROLE_MASTER_APPLICATION_READ',
       'ROLE_MASTER_APPLICATION_WRITE',
     ],
@@ -138,26 +138,26 @@ export const jeusRole = [
     parentId: 1,
   },
   {
-    privileges: ['ROLE_MASTER_STATUS_READ', 'ROLE_MASTER_STATUS_WRITE'],
+    checkboxName: ['ROLE_MASTER_STATUS_READ', 'ROLE_MASTER_STATUS_WRITE'],
     id: 8,
     name: 'Status',
     parentId: 1,
   },
   // root
   {
-    privileges: ['ROLE_JEUS_READ', 'ROLE_JEUS_WRITE'],
+    checkboxName: ['ROLE_JEUS_READ', 'ROLE_JEUS_WRITE'],
     id: 100,
     name: 'Jeus',
     parentId: 0,
   },
   {
-    privileges: ['ROLE_JEUS_OVERVIEW_READ', 'ROLE_JEUS_OVERVIEW_WRITE'],
+    checkboxName: ['ROLE_JEUS_OVERVIEW_READ', 'ROLE_JEUS_OVERVIEW_WRITE'],
     id: 101,
     name: 'Overview',
     parentId: 100,
   },
   {
-    privileges: ['ROLE_JEUS_SERVER_READ', 'ROLE_JEUS_SERVER_WRITE'],
+    checkboxName: ['ROLE_JEUS_SERVER_READ', 'ROLE_JEUS_SERVER_WRITE'],
     id: 102,
     name: 'Server',
     parentId: 100,

@@ -14,7 +14,6 @@ import CheckBoxOutlineBlankTwoToneIcon from '@mui/icons-material/CheckBoxOutline
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import IndeterminateCheckBoxTwoToneIcon from '@mui/icons-material/IndeterminateCheckBoxTwoTone';
 
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
@@ -24,8 +23,8 @@ function App() {
     jeusRole,
   });
 
-  const onCheck = (itemName, updatedItems) => {
-    console.log(itemName, updatedItems);
+  const onCheck = (itemName, updatedItems, checkedItems) => {
+    console.log(itemName, checkedItems);
     // setItems((preState) => ({
     //   ...preState,
     //   [itemName]: updatedItems,
@@ -46,17 +45,15 @@ function App() {
   return (
     <>
       <MultiTree
+        treeId="treeItems"
         items={items.treeItem}
-        itemName="treeItems"
         checkboxCount={12}
         onCheck={onCheck}
         onExpand={onExpand}
-        // initCheckStates={initCheckStates}
-        // checkboxPosition=""
       />
       <MultiTree
         items={items.treeItem}
-        itemName="treeItems2"
+        treeId="treeItems2"
         checkboxCount={4}
         checkboxPosition="detachLeft"
         checkboxDistance={10}
@@ -68,7 +65,7 @@ function App() {
       />
       <MultiTree
         items={items.treeItem}
-        itemName="treeItems3"
+        treeId="treeItems3"
         checkboxCount={3}
         checkboxPosition="attachLeft"
         icons={{
@@ -81,9 +78,10 @@ function App() {
       />
       <MultiTree
         items={items.jeusRole}
-        itemName="jeusRole"
+        treeId="jeusRole"
         checkboxCount={2}
-        isExpand={false}
+        checkedItems={['ROLE_MASTER_SERVER_WRITE']}
+        onCheck={onCheck}
         icons={{
           indeterminate: <IndeterminateCheckBoxTwoToneIcon />,
           check: <CheckBoxTwoToneIcon />,

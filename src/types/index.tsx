@@ -1,17 +1,15 @@
 import type { ReactElement } from 'react';
 
-export type Item = {
+export interface Item {
+  checkboxName: string[];
   id: number;
   name: string;
   parentId: number;
-};
-
-export type ItemState = {
-  id: number;
-  parentId: number;
+}
+export interface ItemState extends Item {
   checkStates: number[];
   expand: boolean;
-};
+}
 
 export type Icons = {
   indeterminate?: ReactElement;

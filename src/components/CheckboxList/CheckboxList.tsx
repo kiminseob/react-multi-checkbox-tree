@@ -6,7 +6,7 @@ import { ItemState, Icons, Item } from 'types';
 type CheckboxListProps = {
   itemStates: ItemState[];
   items: Item[];
-  itemName: string;
+  treeId: string;
   checkboxCount: number;
   checkboxPosition: string;
   checkboxDistance: number;
@@ -23,7 +23,7 @@ type CheckboxListProps = {
 const CheckboxList: React.FC<CheckboxListProps> = ({
   itemStates,
   items,
-  itemName,
+  treeId,
   checkboxCount,
   checkboxPosition,
   checkboxDistance,
@@ -50,7 +50,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
       <CheckboxList
         itemStates={itemStates}
         items={items}
-        itemName={itemName}
+        treeId={treeId}
         checkboxCount={checkboxCount}
         checkboxPosition={checkboxPosition}
         checkboxDistance={checkboxDistance}
@@ -71,7 +71,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
       {idsToRender.map((id) => {
         const item = items.find((i) => i.id === id)!;
         const checkboxStates = getStatesForId(id);
-        console.log(item, isExpand);
+
         return (
           <React.Fragment key={item.id}>
             <li
@@ -82,7 +82,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
                   ? styles.visible
                   : styles.invisible
               }
-              data-id={`${itemName}-${item.id}`}
+              data-id={`${treeId}-${item.id}`}
             >
               <div>
                 {CheckboxPositionAssemble(
