@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MultiTree from 'components/Tree/MultiTree';
 import { treeItem, jeusRole } from 'data/treeItem';
+import styles from './custom.module.scss';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -38,7 +39,7 @@ function App() {
   const initCheckStates = (item) => {
     return [1, 1];
   };
-
+  console.log(styles);
   /** TODO
     checkbox size props , indent props 따로 나눠야 할듯
   */
@@ -47,9 +48,14 @@ function App() {
       <MultiTree
         treeId="treeItems"
         items={items.treeItem}
-        checkboxCount={12}
+        checkboxCount={1}
         onCheck={onCheck}
         onExpand={onExpand}
+        customStyle={{
+          expand: {},
+          label: {},
+          title: {},
+        }}
       />
       <MultiTree
         items={items.treeItem}
@@ -77,6 +83,7 @@ function App() {
         }}
       />
       <MultiTree
+        titles={['read', 'write']}
         items={items.jeusRole}
         treeId="jeusRole"
         checkboxCount={2}

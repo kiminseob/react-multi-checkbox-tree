@@ -1,7 +1,7 @@
 import React from 'react';
 import Checkbox from '../Checkbox/Checkbox';
 import { CheckboxState } from '../Tree/MultiTree';
-import { Item, Icons } from 'types';
+import { Item, Icons, CustomStyle } from 'types';
 import styles from './checkboxItems.module.scss';
 
 type CheckboxItemsProps = {
@@ -11,6 +11,7 @@ type CheckboxItemsProps = {
   checkboxCount: number;
   checkboxStates: number[];
   icons: Icons;
+  customStyle: CustomStyle;
   onClick: (id: number, idx: number) => void;
 };
 
@@ -21,10 +22,11 @@ const CheckboxItems: React.FC<CheckboxItemsProps> = ({
   checkboxStates,
   onClick,
   icons,
+  customStyle,
 }) => {
   return (
     <div
-      className={styles.checkbox}
+      className={styles.checkboxs}
       style={{
         fontSize: indent * (5 / 6),
         width: checkboxCount * indent,
@@ -38,6 +40,7 @@ const CheckboxItems: React.FC<CheckboxItemsProps> = ({
           isChecked={checkboxStates[i] === CheckboxState.CHECKED}
           isIndeterminate={checkboxStates[i] === CheckboxState.INDETERMINATE}
           icons={icons}
+          customStyle={customStyle}
         />
       ))}
     </div>

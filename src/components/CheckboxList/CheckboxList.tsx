@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckboxPositionAssemble from '../CheckboxItems/CheckboxPositionAssemble';
 import styles from './checkboxlist.module.scss';
-import { ItemState, Icons, Item } from 'types';
+import { ItemState, Icons, Item, CustomStyle } from 'types';
 
 type CheckboxListProps = {
   itemStates: ItemState[];
@@ -15,6 +15,7 @@ type CheckboxListProps = {
   icons: Icons;
   indent: number;
   isExpand: boolean;
+  customStyle: CustomStyle;
   onClick: (id: number, idx: number) => void;
   getStatesForId: (id: number) => number[] | undefined;
   toggle: (e: React.MouseEvent<HTMLSpanElement>) => void;
@@ -32,6 +33,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
   icons,
   indent,
   isExpand,
+  customStyle,
   onClick = () => {},
   getStatesForId,
   toggle,
@@ -59,6 +61,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
         icons={icons}
         indent={indent}
         isExpand={isExpand}
+        customStyle={customStyle}
         onClick={onClick}
         getStatesForId={getStatesForId}
         toggle={toggle}
@@ -93,6 +96,7 @@ const CheckboxList: React.FC<CheckboxListProps> = ({
                     indent,
                     checkboxCount,
                     checkboxStates,
+                    customStyle,
                     onClick,
                   },
                   { item, itemStates, icons, getNodeItems, toggle },

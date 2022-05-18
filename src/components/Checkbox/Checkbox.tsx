@@ -1,19 +1,13 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import styles from './checkbox.module.scss';
-
-export type Icons = {
-  indeterminate?: ReactElement;
-  check?: ReactElement;
-  unCheck?: ReactElement;
-  expand?: ReactElement;
-  collapse?: ReactElement;
-};
+import { CustomStyle, Icons } from 'types';
 
 type checkboxProps = {
   isChecked: boolean;
   isIndeterminate: boolean;
   onClick: () => void;
   icons: Icons;
+  customStyle: CustomStyle;
 };
 
 const Checkbox: React.FC<checkboxProps> = ({
@@ -21,6 +15,7 @@ const Checkbox: React.FC<checkboxProps> = ({
   isIndeterminate = false,
   onClick = () => {},
   icons,
+  customStyle,
 }) => {
   const className = `${styles.checkbox} ${
     isIndeterminate ? styles.isIndeterminate : ''
@@ -36,7 +31,16 @@ const Checkbox: React.FC<checkboxProps> = ({
     } else if (icons.unCheck) {
       return React.cloneElement(icons.unCheck, { onClick });
     }
-    return <div className={className} onClick={onClick} />;
+    return (
+      <div
+        className={`${
+          customStyle?.checkbox
+            ? `${className} ${customStyle.checkbox}`
+            : className
+        }`}
+        onClick={onClick}
+      />
+    );
   };
 
   return render();

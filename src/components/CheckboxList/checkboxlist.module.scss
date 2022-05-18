@@ -23,6 +23,15 @@ ul.list {
   }
 }
 
+.title {
+  display: flex;
+
+  span {
+    color: #444;
+    font-size: 12px;
+  }
+}
+
 .arrowWrapper {
   width: 24px;
   height: 24px;

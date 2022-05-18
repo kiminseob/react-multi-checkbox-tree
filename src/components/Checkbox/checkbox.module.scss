@@ -1,17 +1,17 @@
 .checkbox {
-  $color: black;
+  $color: white;
   $size: 1em;
   $fontSize: 1em;
   width: $size;
   height: $size;
   display: inline-block;
   background-color: white;
-  color: white;
+  color: black;
   text-align: center;
   font-weight: bold;
   font-size: $fontSize;
   position: relative;
-  outline: 1px solid #ddd;
+  outline: 1px solid black;
   line-height: $fontSize;
   box-sizing: border-box;
   cursor: pointer;
@@ -19,23 +19,23 @@
   &::after {
     content: '\a0';
   }
+}
 
-  &.isChecked {
-    background-color: $color;
-    &::after {
-      content: '✓';
-      font-size: 0.7em;
-    }
+.isChecked {
+  background-color: white;
+  &::after {
+    content: '✓';
+    font-size: 0.7em;
   }
+}
 
-  &.isUnChecked {
-    border: 1px solid black;
-  }
+.isUnChecked {
+  outline: 1px solid #bbb;
+}
 
-  &.isIndeterminate {
-    background-color: $color;
-    &::after {
-      content: '•';
-    }
+.isIndeterminate {
+  background-color: white;
+  &::after {
+    content: '•';
   }
 }

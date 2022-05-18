@@ -18,3 +18,7 @@ export type Icons = {
   expand?: ReactElement;
   collapse?: ReactElement;
 };
+
+export type CustomStyle = {
+  checkbox?: object;
+};
