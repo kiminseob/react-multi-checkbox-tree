@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import CheckboxList from '../CheckboxList/CheckboxList';
 import { updateItemStates } from './updateItemStates';
-import { Item, Icons, ItemState } from 'types';
+import { Item, Icons, ItemState, CustomStyle } from 'types';
 import styles from '../CheckboxList/checkboxlist.module.scss';
 
 export const CheckboxState = {
@@ -22,6 +22,7 @@ type MultiTreeProps = {
   checkedItems: string[];
   indent: number;
   icons: Icons;
+  customStyle: CustomStyle;
   onCheck: (
     treeId: string,
     updateStates: ItemState[],
@@ -43,6 +44,7 @@ const MultiTree: React.FC<MultiTreeProps> = ({
   checkedItems = [],
   indent = 24,
   icons = {},
+  customStyle = {},
   onCheck = () => {},
   onExpand = () => {},
   initCheckStates,
@@ -77,7 +79,7 @@ const MultiTree: React.FC<MultiTreeProps> = ({
       const checkedChildCount = items
         .filter((i) => i.parentId === id)
         .filter(
-          (_child) => checkedItems.indexOf(_child.checkboxName[idx]) >= 0
+          (child) => checkedItems.indexOf(child.checkboxName[idx]) >= 0
         ).length;
 
       return checkedChildCount === 0
@@ -123,7 +125,9 @@ const MultiTree: React.FC<MultiTreeProps> = ({
     positioned: boolean[]
   ): string | null => {
     const { id, parentId, checkStates, checkboxName } = states;
-    console.log(checkStates[idx]);
+
+    if (!checkboxName || checkboxName.length === 0) return null;
+
     switch (checkStates[idx]) {
       case 1:
         positioned[id] = true;
@@ -152,7 +156,7 @@ const MultiTree: React.FC<MultiTreeProps> = ({
         ],
         []
       )
-      .filter((v) => v);
+      .filter((v: string) => v);
 
   const getChildIds = (parentId: number) =>
     items.filter((i) => i.parentId === parentId).map((i) => i.id);
@@ -197,6 +201,7 @@ const MultiTree: React.FC<MultiTreeProps> = ({
         itemStates={itemStates}
         checkboxPosition={checkboxPosition}
         checkboxDistance={checkboxDistance}
+        customStyle={customStyle}
         indent={indent}
         icons={icons}
         isExpand={isExpand}

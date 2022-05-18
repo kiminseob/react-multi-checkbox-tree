@@ -83,7 +83,6 @@ function App() {
         }}
       />
       <MultiTree
-        titles={['read', 'write']}
         items={items.jeusRole}
         treeId="jeusRole"
         checkboxCount={2}
