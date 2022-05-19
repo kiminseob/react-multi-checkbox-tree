@@ -1,12 +1,10 @@
 # react-multi-checkbox-tree
 
-# Props
+react-multi-checkbox-tree is a component for multiple checkboxes.
 
-This document lists all props of SlideRule component.
+## Props
 
-> Hint: Use suggestion/auto complete to find the props in your code editor.
-
-> The `ref` is forwarded to the root `div` element.
+This document lists all props of MultiTree component.
 
 | Name                 | Type                                      | Default      | Description |
 | -------------------- | ----------------------------------------- | ------------ | ----------- |
@@ -24,4 +22,93 @@ This document lists all props of SlideRule component.
 | **onCheck**          |                                           |              |             |
 | **onExpand**         |                                           |              |             |
 | **initCheckStates**  |                                           |              |             |
-| **?**                |                                           |              |             |
+| **...**              |                                           |              |             |
+
+## Install
+
+```shell
+npm install react-multi-checkbox-tree
+```
+
+## Tree Data
+
+- **id** - It is a unique numeric value.
+- **name** - The name of the checkbox.
+- **parentId** - It points to the parent's ID. If the value is 0, it is the root.
+
+```js
+export const treeItem = [
+  {
+    id: 1,
+    name: 'root1',
+    parentId: 0,
+  },
+  {
+    id: 2,
+    name: 'item1',
+    parentId: 1,
+  },
+  {
+    id: 3,
+    name: 'item2',
+    parentId: 1,
+  },
+  {
+    id: 4,
+    name: 'item3',
+    parentId: 2,
+  },
+  {
+    id: 5,
+    name: 'item4',
+    parentId: 3,
+  },
+  {
+    id: 6,
+    name: 'item5',
+    parentId: 4,
+  },
+  {
+    id: 7,
+    name: 'item6',
+    parentId: 4,
+  },
+  {
+    id: 8,
+    name: 'item7',
+    parentId: 5,
+  },
+  {
+    id: 9,
+    name: 'item8',
+    parentId: 8,
+  },
+  {
+    id: 10,
+    name: 'root2',
+    parentId: 0,
+  },
+  {
+    id: 11,
+    name: 'item9',
+    parentId: 10,
+  },
+  {
+    id: 12,
+    name: 'item10',
+    parentId: 10,
+  },
+];
+```
+
+## Simple Example
+
+```jsx
+import React from 'react';
+import MultiTree from 'react-multi-checkbox-tree';
+import { treeItem } from 'treeItem';
+
+export default function () {
+  return <MultiTree treeId="treeItems" items={treeItem} checkboxCount={3} />;
+}
+```
