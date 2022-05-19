@@ -1,8 +1,8 @@
 {
   "name": "react-multi-checkbox-tree",
-  "version": "1.0.0",
+  "version": "0.0.2-beta",
   "description": "React Checkbox Tree for Multiple Checks",
-  "main": "index.js",
+  "main": "dist/bundle.js",
   "keywords": [
     "react",
     "multi",
@@ -19,10 +19,11 @@
   },
   "author": {
     "name": "In Seop Kim",
-    "email": "kis6473@naver.com",
+    "email": "kisss6473@gmail.com",
     "url": "https://github.com/kiminseob"
   },
   "license": "MIT",
+  "private": false,
   "bugs": {
     "url": "https://github.com/kiminseob/react-multi-checkbox-tree/issues"
   },
@@ -51,10 +52,6 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.6.2",
-    "@mui/material": "^5.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }

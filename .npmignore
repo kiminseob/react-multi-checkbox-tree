@@ -1,0 +1,14 @@
+node_modules/
+public/
+src/
+package-lock.json
+tsconfig.json
+jsconfig.json
+.prettierrc.json
+webpack.config.js
+.eslintrc.json
+.babelrc
+.git
+
+
+
