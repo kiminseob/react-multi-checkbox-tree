@@ -1,6 +1,7 @@
 node_modules/
 public/
 src/
+demo/
 package-lock.json
 tsconfig.json
 jsconfig.json

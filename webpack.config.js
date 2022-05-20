@@ -13,23 +13,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|tsx|ts|scss)$/,
+        test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
         },
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-            options: {
-              minimize: true,
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.html$/,
+      //   use: [
+      //     {
+      //       loader: 'html-loader',
+      //       options: {
+      //         minimize: true,
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: /\.(css|scss)$/,
         use: [
@@ -44,11 +44,11 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'public/index.html',
-    }),
-  ],
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     template: 'public/index.html',
+  //   }),
+  // ],
 
   resolve: {
     extensions: ['.scss', '.js', '.jsx', '.css', '.tsx', '.ts'],
@@ -60,9 +60,10 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('build'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'index.js',
+    libraryTarget: 'commonjs2',
   },
 
   // 개발 서버 설정
@@ -71,5 +72,8 @@ module.exports = {
     port: port,
     open: true, // open page when start
     historyApiFallback: true,
+  },
+  externals: {
+    react: 'commonjs react',
   },
 };

@@ -1,1 +1,1 @@
-export { default } from 'components/Tree/MultiTree';
+export default 'components/Tree/MultiTree';

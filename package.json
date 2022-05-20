@@ -1,8 +1,8 @@
 {
   "name": "react-multi-checkbox-tree",
-  "version": "0.0.2-beta",
+  "version": "0.0.5-beta",
   "description": "React Checkbox Tree for Multiple Checks",
-  "main": "dist/bundle.js",
+  "main": "build/index.js",
   "keywords": [
     "react",
     "multi",
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/kiminseob/react-multi-checkbox-tree",
   "devDependencies": {
+    "@babel/cli": "^7.17.10",
     "@babel/core": "^7.16.10",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
