@@ -25,24 +25,15 @@ export const updateItemStates = (
       childStates.length ===
       childStates.filter((s) => s === CheckboxState.CHECKED).length
     ) {
-      console.log('check', parent.id);
       newState.find((i) => i.id === parent.id)!.checkStates[idx] =
         CheckboxState.CHECKED;
     } else if (
       childStates.length ===
       childStates.filter((s) => s === CheckboxState.UNCHECKED).length
     ) {
-      console.log('uncheck', parent.id);
       newState.find((i) => i.id === parent.id)!.checkStates[idx] =
         CheckboxState.UNCHECKED;
     } else {
-      console.log(
-        'INDETERMINATE',
-        childStates,
-        childStates.length,
-        childStates.filter((s) => s === CheckboxState.UNCHECKED).length,
-        parent.id
-      );
       newState.find((i) => i.id === parent.id)!.checkStates[idx] =
         CheckboxState.INDETERMINATE;
     }
