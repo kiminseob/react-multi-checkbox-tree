@@ -1,8 +1,10 @@
 {
   "name": "react-multi-checkbox-tree",
-  "version": "0.0.5-beta",
+  "version": "0.0.8-beta",
+  "module": "build/index.js",
+  "main": "bulid/index.js",
+  "types": "declarations.d.ts",
   "description": "React Checkbox Tree for Multiple Checks",
-  "main": "build/index.js",
   "keywords": [
     "react",
     "multi",
