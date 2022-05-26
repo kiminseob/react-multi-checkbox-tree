@@ -4,28 +4,6 @@ react-multi-checkbox-tree is a component for multiple checkboxes.
 
 ![examples](https://github.com/kiminseob/react-multi-checkbox-tree/blob/main/docs/simple-example.gif)
 
-## Props
-
-This document lists all props of MultiTree component.
-
-| Name                 | Type                                      | Default      | Description |
-| -------------------- | ----------------------------------------- | ------------ | ----------- |
-| **treeId**           | string                                    | ''           |             |
-| **items**            | Item[]                                    | []           |             |
-| **checkedItems**     | string[]                                  | []           |             |
-| **checkboxCount**    | number                                    | 1            |             |
-| **checkboxPosition** | 'detachLeft'\|'attachLeft'\|'attachRight' | 'detachLeft' |             |
-| **checkboxDistance** | number                                    | 5            |             |
-| **indent**           | number                                    | 24           |             |
-| **icons**            | React Element                             | []           |             |
-| **disable**          | boolean                                   | false        |             |
-| **isChecked**        | boolean                                   | true         |             |
-| **isExpand**         | boolean                                   | true         |             |
-| **onCheck**          |                                           |              |             |
-| **onExpand**         |                                           |              |             |
-| **initCheckStates**  |                                           |              |             |
-| **...**              |                                           |              |             |
-
 ## Install
 
 ```shell
@@ -111,6 +89,54 @@ import MultiTree from 'react-multi-checkbox-tree';
 import { treeItem } from 'treeItem';
 
 export default function () {
-  return <MultiTree treeId="treeItems" items={treeItem} checkboxCount={3} />;
+  return <MultiTree treeId="treeItems" items={treeItem} checkboxCount={2} />;
 }
 ```
+
+## Custom Style Example
+
+![customStyle-examples](https://github.com/kiminseob/react-multi-checkbox-tree/blob/main/docs/customStyle-example.png)
+
+```jsx
+...
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
+
+export default function () {
+  return (
+    <MultiTree
+      treeId="treeItems"
+      items={treeItem}
+      checkboxCount={2}
+      icons={{
+        indeterminate: <IndeterminateCheckBoxIcon />,
+        check: <CheckBoxIcon />,
+        unCheck: <CheckBoxOutlineBlankIcon />,
+      }}
+    />
+  );
+}
+```
+
+## Props
+
+This document lists all props of MultiTree component.
+
+| Name                 | Type                                      | Default      | Description |
+| -------------------- | ----------------------------------------- | ------------ | ----------- |
+| **treeId**           | string                                    | ''           |             |
+| **items**            | Item[]                                    | []           |             |
+| **checkedItems**     | string[]                                  | []           |             |
+| **checkboxCount**    | number                                    | 1            |             |
+| **checkboxPosition** | 'detachLeft'\|'attachLeft'\|'attachRight' | 'detachLeft' |             |
+| **checkboxDistance** | number                                    | 5            |             |
+| **indent**           | number                                    | 24           |             |
+| **icons**            | React Element                             | []           |             |
+| **disable**          | boolean                                   | false        |             |
+| **isChecked**        | boolean                                   | true         |             |
+| **isExpand**         | boolean                                   | true         |             |
+| **onCheck**          |                                           |              |             |
+| **onExpand**         |                                           |              |             |
+| **initCheckStates**  |                                           |              |             |
+| **...**              |                                           |              |             |
