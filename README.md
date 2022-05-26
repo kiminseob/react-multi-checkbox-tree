@@ -2,6 +2,8 @@
 
 react-multi-checkbox-tree is a component for multiple checkboxes.
 
+![examples](https://github.com/kiminseob/react-multi-checkbox-tree/blob/main/docs/simple-example.gif)
+
 ## Props
 
 This document lists all props of MultiTree component.
