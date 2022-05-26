@@ -7,7 +7,7 @@ react-multi-checkbox-tree is a component for multiple checkboxes.
 ## Install
 
 ```shell
-npm install react-multi-checkbox-tree
+npm install -S react-multi-checkbox-tree
 ```
 
 ## Tree Data
@@ -114,6 +114,24 @@ export default function () {
         check: <CheckBoxIcon />,
         unCheck: <CheckBoxOutlineBlankIcon />,
       }}
+    />
+  );
+}
+```
+
+## Checkbox Position Example
+
+![customStyle-examples](https://github.com/kiminseob/react-multi-checkbox-tree/blob/main/docs/checkboxPosition-exmaple.png)
+
+```jsx
+...
+export default function () {
+  return (
+    <MultiTree
+      treeId="treeItems"
+      items={treeItem}
+      checkboxCount={3}
+      checkboxPosition="attachLeft"
     />
   );
 }
